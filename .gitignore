@@ -142,3 +142,5 @@ my_model/
 
 # ast template
 ast_index_file.py
+data/**/*
+segsub_data/**/*

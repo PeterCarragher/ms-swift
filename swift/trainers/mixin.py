@@ -383,7 +383,7 @@ class SwiftMixin:
                 self.deepspeed._zero3_consolidated_16bit_state_dict = MethodType(_zero3_consolidated_16bit_state_dict,
                                                                                  self.deepspeed)
         if version.parse(transformers.__version__) >= version.parse('4.36') or not self.args.save_only_model:
-            result = super()._save_checkpoint(model, trial, metrics)
+            result = super()._save_checkpoint(model, trial)
         else:
             result = self._save_only_model(model, trial, metrics)
         logger.info(f'Saving model checkpoint to {self.state.last_model_checkpoint}')
@@ -765,7 +765,7 @@ class RLHFTrainerMixin:
         if hasattr(model, '_save_load_context'):
             context = model._save_load_context(self)
         with context:
-            return super()._save_checkpoint(model, trial, metrics)
+            return super()._save_checkpoint(model, trial)
 
     def concatenated_forward(
         self, model: nn.Module, batch: Dict[str, Union[List, torch.LongTensor]]
